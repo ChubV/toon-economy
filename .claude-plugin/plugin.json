@@ -1,0 +1,11 @@
+{
+  "name": "toon-economy",
+  "version": "0.1.0",
+  "description": "Convert JSON tool output to TOON (Token-Oriented Object Notation) to reduce context tokens. Surfaces estimated savings in the Claude Code interface.",
+  "author": {
+    "name": "Volodymyr Chub",
+    "url": "https://github.com/chubv"
+  },
+  "keywords": ["toon", "tokens", "json", "posttooluse", "hook", "economy"],
+  "license": "MIT"
+}

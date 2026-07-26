@@ -1,0 +1,25 @@
+{
+  "service": "inventory-api",
+  "version": "3.2.1",
+  "healthy": true,
+  "uptime_seconds": 41235,
+  "regions": ["us-east-1", "us-west-2", "eu-central-1"],
+  "endpoints": [
+    {"method": "GET",    "path": "/items",        "auth": true,  "rate_limit": 1000},
+    {"method": "POST",   "path": "/items",        "auth": true,  "rate_limit": 100},
+    {"method": "GET",    "path": "/items/{id}",   "auth": true,  "rate_limit": 1000},
+    {"method": "DELETE", "path": "/items/{id}",   "auth": true,  "rate_limit": 50}
+  ],
+  "metrics": {
+    "requests_per_minute": 18432,
+    "p99_latency_ms": 87.5,
+    "error_rate": 0.0021,
+    "top_errors": [
+      {"code": "NOT_FOUND",       "count": 142},
+      {"code": "RATE_LIMITED",    "count": 38},
+      {"code": "VALIDATION_ERROR","count": 11}
+    ]
+  },
+  "owner": null,
+  "flags": {}
+}

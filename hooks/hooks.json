@@ -1,0 +1,17 @@
+{
+  "description": "Rewrite JSON tool output as TOON to save context tokens. Fires on every PostToolUse; non-JSON output is skipped in microseconds by a first-character check.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/toon_hook.py"],
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
