@@ -99,7 +99,7 @@ You can also run the reporter directly: `python3 scripts/stats.py show`
 3. Add the plugin from the project directory:
 
    ```bash
-   claude plugin add /path/to/plugin/toon-economy
+   claude --plugin-dir /path/to/plugin/toon-economy
    ```
 
    or, in a session, `/plugin` → add the path above.

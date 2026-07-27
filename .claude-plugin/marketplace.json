@@ -1,0 +1,15 @@
+{
+  "name": "chubv",
+  "owner": {
+    "name": "Volodymyr Chub"
+  },
+  "plugins": [
+    {
+      "name": "toon-economy",
+      "source": {
+        "source": "github",
+        "repo": "ChubV/toon-economy"
+      }
+    }
+  ]
+}
