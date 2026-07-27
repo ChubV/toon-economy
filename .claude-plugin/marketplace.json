@@ -6,9 +6,7 @@
   "plugins": [
     {
       "name": "toon-economy",
-      "source": {
-        "source": "./"
-      }
+      "source": "./"
     }
   ]
 }
