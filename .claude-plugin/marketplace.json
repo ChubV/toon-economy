@@ -7,8 +7,7 @@
     {
       "name": "toon-economy",
       "source": {
-        "source": "url",
-        "repo": "https://github.com/ChubV/toon-economy.git"
+        "source": "./"
       }
     }
   ]
