@@ -24,15 +24,12 @@ def check(name: str, cond: bool, detail: str = "") -> None:
 
 def with_tmp_dir(fn):
     tmp = Path(tempfile.mkdtemp(prefix="toon-stats-test-"))
-    old = os.environ.get("CLAUDE_PLUGIN_DATA")
-    os.environ["CLAUDE_PLUGIN_DATA"] = str(tmp)
+    orig_data_dir = stats._data_dir
+    stats._data_dir = lambda: tmp
     try:
         fn(stats)
     finally:
-        if old is not None:
-            os.environ["CLAUDE_PLUGIN_DATA"] = old
-        else:
-            os.environ.pop("CLAUDE_PLUGIN_DATA", None)
+        stats._data_dir = orig_data_dir
         shutil.rmtree(tmp, ignore_errors=True)
 
 
@@ -142,8 +139,8 @@ def test_persistence_across_load(_stats):
 
 def test_hook_integration_accumulates():
     tmp = Path(tempfile.mkdtemp(prefix="toon-stats-hook-"))
-    old = os.environ.get("CLAUDE_PLUGIN_DATA")
-    os.environ["CLAUDE_PLUGIN_DATA"] = str(tmp)
+    orig_data_dir = stats._data_dir
+    stats._data_dir = lambda: tmp
     try:
         import toon_hook
         payload_a = {
@@ -170,10 +167,7 @@ def test_hook_integration_accumulates():
         check("hook integration: tokens_saved is positive",
               s["tokens_saved"] > 0, str(s))
     finally:
-        if old is not None:
-            os.environ["CLAUDE_PLUGIN_DATA"] = old
-        else:
-            os.environ.pop("CLAUDE_PLUGIN_DATA", None)
+        stats._data_dir = orig_data_dir
         shutil.rmtree(tmp, ignore_errors=True)
 
 

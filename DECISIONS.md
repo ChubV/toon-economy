@@ -121,10 +121,10 @@ in `--debug`), and exits 0 with no output.
 is hostile. The worst case we accept is "no conversion happened this turn";
 the worst case we refuse is "the user's session broke."
 
-## 9. Lifetime stats persisted to `${CLAUDE_PLUGIN_DATA}`
+## 9. Lifetime stats persisted to local `data/` directory
 
 **Decision.** Every successful conversion appends to a counter at
-`${CLAUDE_PLUGIN_DATA}/stats.json`. A `/toon-economy-stats` slash command
+`data/stats.json` (adjacent to the repository root). A `/toon-economy-stats` slash command
 reads it via `scripts/stats.py show` and renders a per-tool breakdown.
 
 **Why.** Per-call `systemMessage` shows one turn's savings; users also want
@@ -137,11 +137,6 @@ parallel tool calls. The accumulator does a read-modify-write under
 `fcntl.flock(LOCK_EX)` on POSIX, so concurrent writers serialize. On Windows
 `fcntl` is unavailable and the lock is skipped — a rare race may lose one
 increment, which is fine for an advisory counter.
-
-**Why `CLAUDE_PLUGIN_DATA`.** It is the documented plugin-persistent dir
-that survives plugin updates, distinct from `CLAUDE_PLUGIN_ROOT` (which is
-replaced on update). Putting stats there means upgrading the plugin keeps
-the user's totals.
 
 **Failure isolation.** `record_conversion` swallows all exceptions. Stats
 are advisory: if the data dir is unwritable or the JSON corrupt, the hook

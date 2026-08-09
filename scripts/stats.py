@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """Lifetime stats accumulation and reporting for ToonEconomy.
 
-Stats live at `${CLAUDE_PLUGIN_DATA}/stats.json`.
-
 CLI:
   python3 stats.py show              # pretty-print lifetime stats (default)
   python3 stats.py json              # raw JSON to stdout
@@ -28,13 +26,6 @@ STATS_FILENAME = "stats.json"
 
 
 def _data_dir() -> Path:
-    """Resolve the plugin's persistent data directory. Honors
-    $CLAUDE_PLUGIN_DATA (set by Claude Code for plugin hooks); falls back to a
-    local `data/` dir next to the plugin so the script is runnable standalone
-    for tests and demos."""
-    env = os.environ.get("CLAUDE_PLUGIN_DATA")
-    if env:
-        return Path(env)
     return Path(__file__).resolve().parent.parent / "data"
 
 

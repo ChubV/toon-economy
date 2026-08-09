@@ -56,8 +56,9 @@ toon-economy/
 ## Slash command: `/toon-economy-stats`
 
 The plugin ships a `/toon-economy-stats` command. Each conversion also writes
-to a lifetime counter at `${CLAUDE_PLUGIN_DATA}/stats.json` (POSIX-locked to
-survive parallel PostToolUse firings; advisory only, never blocks the hook).
+to a lifetime counter at `data/stats.json` (adjacent to the repo root;
+POSIX-locked to survive parallel PostToolUse firings; advisory only, never
+blocks the hook).
 The command runs the reporter read-only and shows:
 
 - total tool calls with conversions
